@@ -10,14 +10,6 @@ Program to find the following:
 '''
 import csv
 
-def open_file(filename):
-    '''
-    INPUT - Filename in CWD
-    RETURN - open file "object"
-    '''
-
-    return open(filename, 'r')
-
 def create_diff_csvs(old_filename, new_filename):
     '''
     INPUT - 2 CSV file objects
@@ -27,8 +19,8 @@ def create_diff_csvs(old_filename, new_filename):
         CSV with records deleted
     '''
 
-    fo_old = open_file(old_filename)
-    fo_new = open_file(new_filename)
+    fo_old = open(old_filename, 'r')
+    fo_new = open(new_filename, 'r')
     csv_old = csv.reader(fo_old)
     csv_new = csv.reader(fo_new)
 
@@ -44,6 +36,9 @@ def create_diff_csvs(old_filename, new_filename):
     #Responsible thing is to close open files
     fo_old.close()
     fo_new.close()
+
+    fo_records_added = open('records_added.csv', 'w')
+    fo_records_deleted = open('records_deleted.csv', 'w')
 
     records_added = csv.writer(open('records_added.csv', 'w'), delimiter=',',
                                quoting=csv.QUOTE_ALL)
