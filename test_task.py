@@ -8,4 +8,8 @@ For more info see: http://pytest.org/latest/
 import io
 import task_bug_scrub_csv_diff as bs
 def test_task():
-    assert True == True
+    return_text = ('Task Finished.\n'
+                   'records_added.csv and records_deleted.csv created.\n'
+                   'Please download them from your files.')
+    assert bs.task(None, 'GDC_852.csv', 'GDC_666.csv') == return_text
+
