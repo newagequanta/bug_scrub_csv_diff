@@ -8,6 +8,7 @@ Program to find the following:
         b. Records removed from the OLD CSV
         b. Total number of differences
 '''
+import csv
 
 def open_file(filename):
     '''
@@ -17,15 +18,6 @@ def open_file(filename):
 
     return open(filename, 'r')
 
-def create_csv_obj(filename):
-    '''
-    INPUT - Filename in CWD
-    RETURN - open file "object"
-    '''
-    import csv
-
-    return csv.reader(filename)
-
 def create_diff_csvs(old_filename, new_filename):
     '''
     INPUT - 2 CSV file objects
@@ -34,7 +26,6 @@ def create_diff_csvs(old_filename, new_filename):
         CSV with records added
         CSV with records deleted
     '''
-    import csv
 
     fo_old = open_file(old_filename)
     fo_new = open_file(new_filename)
@@ -49,6 +40,10 @@ def create_diff_csvs(old_filename, new_filename):
 
     for line in csv_new:
         dict_new[line[0]] = line[1:]
+
+    #Responsible thing is to close open files
+    fo_old.close()
+    fo_new.close()
 
     records_added = csv.writer(open('records_added.csv', 'w'), delimiter=',',
                                quoting=csv.QUOTE_ALL)
