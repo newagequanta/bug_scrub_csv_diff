@@ -3,22 +3,22 @@
   "main": "__init__.py",
   "inputs": [
     {
-      "name": "old_filename",
-      "type": "inputFile",
-      "value": null,
+      "description": "CSV of the Old Bug Scrub",
       "optional": false,
-      "description": "CSV of the Old Bug Scrub"
+      "value": null,
+      "type": "inputFile",
+      "name": "old_filename"
     },
     {
-      "name": "new_filename",
-      "type": "inputFile",
-      "value": null,
+      "description": "CSV of the New Bug Scrub",
       "optional": false,
-      "description": "CSV of the New Bug Scrub"
+      "value": null,
+      "type": "inputFile",
+      "name": "new_filename"
     }
   ],
   "author": "nimbhasi",
-  "description": "",
+  "description": "This package accepts to CSVs, supposed to be created by another BDB script, bug_scrub_to_csv and finds the differences between the two.\nINPUT: Two files, old CSV, new CSV\nOUTPUT: records_added.csv, records_deleted.csv",
   "entitlements": [
     "public"
   ],
