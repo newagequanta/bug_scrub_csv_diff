@@ -1,12 +1,28 @@
 {
   "name": "bug_scrub_csv_diff",
   "main": "__init__.py",
-  "inputs": [],
+  "inputs": [
+    {
+      "description": "CSV of the Old Bug Scrub",
+      "optional": false,
+      "value": null,
+      "type": "inputFile",
+      "name": "old_filename"
+    },
+    {
+      "description": "CSV of the New Bug Scrub",
+      "optional": false,
+      "value": null,
+      "type": "inputFile",
+      "name": "new_filename"
+    }
+  ],
   "author": "nimbhasi",
+  "description": "",
   "entitlements": [],
   "groups": [],
   "contributors": [],
-  "minutes_saved": 0,
+  "minutes_saved": null,
   "labels": [],
   "service": "python3",
   "timeOut": 60000
