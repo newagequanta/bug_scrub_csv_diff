@@ -19,5 +19,6 @@ def task(env, new_filename, old_filename):
 
     """
     code.create_diff_csvs(old_filename, new_filename)
-    return ('Task Finished. records_added.csv and records_deleted.csv created,'
+    return ('Task Finished.\n'
+            'records_added.csv and records_deleted.csv created.\n'
             'Please download them from your files.')
