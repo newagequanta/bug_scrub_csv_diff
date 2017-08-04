@@ -14,7 +14,6 @@ def create_diff_csvs(old_filename, new_filename):
     '''
     INPUT - 2 CSV file objects
     OUTPUT:
-        Total number of differences
         CSV with records added
         CSV with records deleted
     '''
@@ -24,14 +23,18 @@ def create_diff_csvs(old_filename, new_filename):
     csv_old = csv.reader(fo_old)
     csv_new = csv.reader(fo_new)
 
-    dict_old = {}
-    dict_new = {}
+    list_old = []
+    list_new = []
+    bugs_old = []
+    bugs_new = []
 
     for line in csv_old:
-        dict_old[line[0]] = line[1:]
+        bugs_old.append(line[0])
+        list_old.append(line)
 
     for line in csv_new:
-        dict_new[line[0]] = line[1:]
+        bugs_new.append(line[0])
+        list_new.append(line)
 
     #Responsible thing is to close open files
     fo_old.close()
@@ -45,14 +48,15 @@ def create_diff_csvs(old_filename, new_filename):
     records_deleted = csv.writer(fo_records_deleted, delimiter=',',
                                  quoting=csv.QUOTE_ALL)
 
-    for line in dict_new:
-        if line not in dict_old:
-            records_added.writerow([line]+dict_new[line])
+    for bug, record in zip(bugs_new, list_new):
+        if bug not in bugs_old:
+            records_added.writerow(record)
         else:
-            del dict_old[line]
+            bugs_old.remove(bug)
 
-    for line in dict_old:
-        records_deleted.writerow([line]+dict_old[line])
+    for record in list_old:
+        if record[0] in bugs_old:
+            records_deleted.writerow(record)
 
     fo_records_added.close()
     fo_records_deleted.close()
