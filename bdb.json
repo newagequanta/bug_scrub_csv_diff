@@ -3,18 +3,18 @@
   "main": "__init__.py",
   "inputs": [
     {
-      "name": "old_filename",
-      "type": "inputFile",
-      "value": null,
+      "description": "CSV of the Old Bug Scrub",
       "optional": false,
-      "description": "CSV of the Old Bug Scrub"
+      "value": null,
+      "type": "inputFile",
+      "name": "old_filename"
     },
     {
-      "name": "new_filename",
-      "type": "inputFile",
-      "value": null,
+      "description": "CSV of the New Bug Scrub",
       "optional": false,
-      "description": "CSV of the New Bug Scrub"
+      "value": null,
+      "type": "inputFile",
+      "name": "new_filename"
     }
   ],
   "author": "nimbhasi",
