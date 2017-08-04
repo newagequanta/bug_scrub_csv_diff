@@ -40,9 +40,9 @@ def create_diff_csvs(old_filename, new_filename):
     fo_records_added = open('records_added.csv', 'w')
     fo_records_deleted = open('records_deleted.csv', 'w')
 
-    records_added = csv.writer(open('records_added.csv', 'w'), delimiter=',',
+    records_added = csv.writer(fo_records_added, delimiter=',',
                                quoting=csv.QUOTE_ALL)
-    records_deleted = csv.writer(open('records_deleted.csv', 'w'), delimiter=',',
+    records_deleted = csv.writer(fo_records_deleted, delimiter=',',
                                  quoting=csv.QUOTE_ALL)
 
     for line in dict_new:
@@ -54,14 +54,5 @@ def create_diff_csvs(old_filename, new_filename):
     for line in dict_old:
         records_deleted.writerow([line]+dict_old[line])
 
-def main():
-    '''
-    Main caller function
-    '''
-
-    old_filename = input('Input the name of old CSV in CWD: ')
-    new_filename = input('Input the name of new CSV in CWD: ')
-
-    create_diff_csvs(old_filename, new_filename)
-
-main()
+    fo_records_added.close()
+    fo_records_deleted.close()
