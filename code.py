@@ -9,6 +9,14 @@ Program to find the following:
         b. Total number of differences
 '''
 
+def open_file(filename):
+    '''
+    INPUT - Filename in CWD
+    RETURN - open file "object"
+    '''
+
+    return open(filename, 'r')
+
 def create_csv_obj(filename):
     '''
     INPUT - Filename in CWD
@@ -18,7 +26,7 @@ def create_csv_obj(filename):
 
     return csv.reader(filename)
 
-def create_diff_csvs(csv_old, csv_new):
+def create_diff_csvs(old_filename, new_filename):
     '''
     INPUT - 2 CSV file objects
     OUTPUT:
@@ -27,19 +35,25 @@ def create_diff_csvs(csv_old, csv_new):
         CSV with records deleted
     '''
     import csv
+
+    fo_old = open_file(old_filename)
+    fo_new = open_file(new_filename)
+    csv_old = csv.reader(fo_old)
+    csv_new = csv.reader(fo_new)
+
     dict_old = {}
     dict_new = {}
-
-    records_added = csv.writer(open('records_added.csv', 'w'), delimiter=',',
-                               quoting=csv.QUOTE_ALL)
-    records_deleted = csv.writer(open('records_deleted.csv', 'w'), delimiter=',',
-                                 quoting=csv.QUOTE_ALL)
 
     for line in csv_old:
         dict_old[line[0]] = line[1:]
 
     for line in csv_new:
         dict_new[line[0]] = line[1:]
+
+    records_added = csv.writer(open('records_added.csv', 'w'), delimiter=',',
+                               quoting=csv.QUOTE_ALL)
+    records_deleted = csv.writer(open('records_deleted.csv', 'w'), delimiter=',',
+                                 quoting=csv.QUOTE_ALL)
 
     for line in dict_new:
         if line not in dict_old:
@@ -55,10 +69,9 @@ def main():
     Main caller function
     '''
 
-    csv_old = input('Input the name of old CSV in CWD: ')
-    csv_new = input('Input the name of new CSV in CWD: ')
+    old_filename = input('Input the name of old CSV in CWD: ')
+    new_filename = input('Input the name of new CSV in CWD: ')
 
-    with open(csv_old, 'r') as fo_old, open(csv_new, 'r') as fo_new:
-        create_diff_csvs(create_csv_obj(fo_old), create_csv_obj(fo_new))
+    create_diff_csvs(old_filename, new_filename)
 
 main()
