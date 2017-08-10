@@ -20,8 +20,8 @@ def test_task():
     test the hashes of the files created against precalculated hashes
     '''
     task_bug_scrub_csv_diff.task(None,
-                                 '/var/bdb/sessions/sandboxed-user/test_852.csv',
-                                 '/var/bdb/sessions/sandboxed-user/test_666.csv')
+                                 '/var/bdb/sessions/sandboxed-user/test_666.csv',
+                                 '/var/bdb/sessions/sandboxed-user/test_852.csv')
     hash_added = hashlib.sha256(open('records_added.csv',
                                      'rb').read()).hexdigest()
     hash_deleted = hashlib.sha256(open('records_deleted.csv',
